@@ -81,7 +81,11 @@ export const ListContainerMoviemntation = styled.div`
 `
 
 export const ListMovimentatios = styled.div`
-  flex: 1;
+  height: 90%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   & > ul {
     list-style: none;
@@ -137,5 +141,12 @@ export const ListFooterInfo = styled.div`
     color: #03AC00;
     font-family: 'Raleway', sans-serif;
     font-size: 17px;
+
+    & > .positive {
+      color: #03AC00;
+    }
+    & > .negative {
+      color: #C70000;
+    }
   }
 `

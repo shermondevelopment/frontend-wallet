@@ -29,7 +29,7 @@ const Signin: React.FC = () => {
     e.preventDefault()
     try {
       const userLogged = await api.post('/signin', { email, password })
-      localStorage.setItem('user', userLogged.data)
+      localStorage.setItem('user', JSON.stringify(userLogged.data))
       navigate('/home')
     } catch (error: any) {
       setMessage({

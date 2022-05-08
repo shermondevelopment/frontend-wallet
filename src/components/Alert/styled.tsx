@@ -16,6 +16,9 @@ export const Alert = styled.div<{ type: string; show: boolean }>`
   font-size: 14px;
   font-family: 'Raleway',sans-serif;
   top: ${(props) => (props.show ? '80px' : '-200px')};
+  left: 0;
+  right: 0;
+  margin: auto;
 
   span {
     margin-left: 15px;
