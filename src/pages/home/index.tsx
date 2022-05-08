@@ -37,6 +37,16 @@ const Home: React.FC = () => {
     navigate('/')
   }
 
+  const deleteTrans = async (id: string) => {
+    const deleted = window.confirm('Deseja deletar')
+
+    if(deleted) {
+      const filterTransaction = transaction && transaction?.filter( item => item._id !== id )
+      setTransaction(filterTransaction)
+      await api.delete(`transaction/delete/${id}`, { headers: { token: JSON.parse(localStorage.getItem('user') as string).token } })
+    }
+  }
+
   const getTransactions = async () => {
     try {
       const { data } = await api.get('/transaction', { headers: {
@@ -84,7 +94,7 @@ const Home: React.FC = () => {
                       </div>
                       <span className={`value-movimentation ${item.is_entry ? 'entry' : 'exit'}`}>
                         {item.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
-                        &nbsp;<span>x</span>
+                        &nbsp;<span onClick={() => deleteTrans(item._id)}>x</span>
                       </span>
                     </S.ListOptions>
                   </li>
