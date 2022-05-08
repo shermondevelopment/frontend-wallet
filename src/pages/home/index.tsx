@@ -83,39 +83,44 @@ const Home: React.FC = () => {
           <img src="/assets/img/open.svg" alt="exit" onClick={() => logOut()}/>
         </S.PageHeader>
         <S.PageHomeMovimentions>
-          {/* <span className="not-movimentatios">Não há registros de entrada ou saida</span> */}
-          <S.ListContainerMoviemntation>
-            <S.ListMovimentatios>
-              <ul>
-               {transaction && transaction.map( item => {
-                 return (
-                  <li key={item._id}>
-                    <S.ListOptions>
-                      <div className="list-info">
-                        <span className="list-date">{format(new Date(item.date_movimentation), 'dd/MM')}</span>
-                        <span className="list-text" onClick={() => updatedTransaction(item._id, item.is_entry)}>{item.description}</span>
-                      </div>
-                      <span className={`value-movimentation ${item.is_entry ? 'entry' : 'exit'}`}>
-                        {item.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
-                        &nbsp;<span onClick={() => deleteTrans(item._id)}>x</span>
-                      </span>
-                    </S.ListOptions>
-                  </li>
-                 )
-               } )}
-              </ul>
-            </S.ListMovimentatios>
-            <S.ListFooterInfo>
-              <span className="balance">Saldo</span>
-              <span className="money">
-                {balance && 
-                  <span className={`${balance < 0 ? 'negative' : 'positive' }`}>
-                    {(balance ).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
-                  </span>
-                }
-              </span>
-            </S.ListFooterInfo>
-          </S.ListContainerMoviemntation>
+        {transaction && transaction.length === 0 && <span className="not-movimentatios">Não há registros de entrada ou saida</span>}
+
+        {transaction && transaction.length > 0 &&  
+           <S.ListContainerMoviemntation>
+           <S.ListMovimentatios>
+             <ul>
+              {transaction && transaction.map( item => {
+                return (
+                 <li key={item._id}>
+                   <S.ListOptions>
+                     <div className="list-info">
+                       <span className="list-date">{format(new Date(item.date_movimentation), 'dd/MM')}</span>
+                       <span className="list-text" onClick={() => updatedTransaction(item._id, item.is_entry)}>{item.description}</span>
+                     </div>
+                     <span className={`value-movimentation ${item.is_entry ? 'entry' : 'exit'}`}>
+                       {item.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
+                       &nbsp;<span onClick={() => deleteTrans(item._id)}>x</span>
+                     </span>
+                   </S.ListOptions>
+                 </li>
+                )
+              } )}
+             </ul>
+           </S.ListMovimentatios>
+           {transaction && transaction.length > 0 && 
+             <S.ListFooterInfo>
+             <span className="balance">Saldo</span>
+             <span className="money">
+               {balance && 
+                 <span className={`${balance < 0 ? 'negative' : 'positive' }`}>
+                   {(balance ).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
+                 </span>
+               }
+             </span>
+           </S.ListFooterInfo>
+           }
+         </S.ListContainerMoviemntation>
+        }
         </S.PageHomeMovimentions>
         <S.Transactions>
         <S.PageHomeNewTransaction>
