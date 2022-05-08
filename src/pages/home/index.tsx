@@ -112,7 +112,7 @@ const Home: React.FC = () => {
           </Link>
         </S.PageHomeNewTransaction>
         <S.PageHomeNewTransaction>
-          <Link to="/new-entry">
+          <Link to="/exit">
             <img src="/assets/img/minus.svg" alt="new entry" />
             <span>Nova saída</span>
           </Link>

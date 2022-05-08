@@ -6,6 +6,7 @@ export const PageEntry = styled.main`
   flex-direction: column;
 
   & > form {
+    max-width: 326px;
     margin-top: 40px;
   }
 
