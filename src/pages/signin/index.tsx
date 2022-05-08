@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 /* link */
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 /* axios */
 import api from '../../services/api'
@@ -17,6 +17,9 @@ import { PageSignin, PageSigninForm, PageSigninTitle } from './styled'
 
 const Signin: React.FC = () => {
 
+  /* navigation */
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState({ show: false, alert: '' })
@@ -26,7 +29,8 @@ const Signin: React.FC = () => {
     e.preventDefault()
     try {
       const userLogged = await api.post('/signin', { email, password })
-      localStorage.setItem('token', userLogged.data.token)
+      localStorage.setItem('user', userLogged.data)
+      navigate('/home')
     } catch (error: any) {
       setMessage({
         alert: error?.response?.data?.error,
@@ -44,7 +48,7 @@ const Signin: React.FC = () => {
       </Alert>
       <PageSigninForm>
         <PageSigninTitle>MyWallet</PageSigninTitle>
-        <form className="form" onSubmit={handleSignin}>
+        <form className="form" method="post" onSubmit={handleSignin}>
           <input type="email" name="email" required placeholder="E-mail" value={email} onChange={e => setEmail(e.currentTarget.value)} />
           <input type="password" name="password" required placeholder="Senha" value={password} onChange={e => setPassword(e.currentTarget.value)} />
           <Button>Entrar</Button>
