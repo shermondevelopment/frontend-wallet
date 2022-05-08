@@ -10,6 +10,7 @@ import Signin from './pages/signin'
 import Signup from './pages/signup'
 import Entry from './pages/entry'
 import Home from './pages/home'
+import Exit from './pages/exit'
 
 
 const Routing = () => (
@@ -19,6 +20,8 @@ const Routing = () => (
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<Home />} />
       <Route path="/new-entry"  element={<Entry />} />
+      <Route path="/exit"  element={<Exit />} />
+
     </Routes>
   </BrowserRouter>
 )
