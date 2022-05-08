@@ -11,6 +11,8 @@ import Signup from './pages/signup'
 import Entry from './pages/entry'
 import Home from './pages/home'
 import Exit from './pages/exit'
+import UpdateEntry from './pages/update-entry'
+import UpdateExit from './pages/update-exit'
 
 /* protect router */
 import ProtectedRoute from './utils/private-route'
@@ -24,6 +26,10 @@ const Routing = () => (
       <Route path="/home" element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
       <Route path="/new-entry"  element={<ProtectedRoute><Entry /></ProtectedRoute>} />
       <Route path="/exit"  element={<ProtectedRoute><Exit /></ProtectedRoute>} />
+      <Route path="/update-entry/:id"  element={<ProtectedRoute><UpdateEntry /></ProtectedRoute>} />
+      <Route path="/update-exit/:id"  element={<ProtectedRoute><UpdateExit /></ProtectedRoute>} />
+
+
     </Routes>
   </BrowserRouter>
 )

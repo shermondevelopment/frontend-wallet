@@ -41,10 +41,13 @@ const Home: React.FC = () => {
     const deleted = window.confirm('Deseja deletar')
 
     if(deleted) {
-      const filterTransaction = transaction && transaction?.filter( item => item._id !== id )
-      setTransaction(filterTransaction)
       await api.delete(`transaction/delete/${id}`, { headers: { token: JSON.parse(localStorage.getItem('user') as string).token } })
+      getTransactions()
     }
+  }
+
+  const updatedTransaction = (id: string, isEntry: boolean) => {
+    isEntry ? navigate(`/update-entry/${id}`) : navigate(`/update-exit/${id}`)
   }
 
   const getTransactions = async () => {
@@ -90,7 +93,7 @@ const Home: React.FC = () => {
                     <S.ListOptions>
                       <div className="list-info">
                         <span className="list-date">{format(new Date(item.date_movimentation), 'dd/MM')}</span>
-                        <span className="list-text">{item.description}</span>
+                        <span className="list-text" onClick={() => updatedTransaction(item._id, item.is_entry)}>{item.description}</span>
                       </div>
                       <span className={`value-movimentation ${item.is_entry ? 'entry' : 'exit'}`}>
                         {item.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}).replace(/R\$/, '')}
